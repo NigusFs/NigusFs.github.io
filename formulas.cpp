@@ -2,7 +2,7 @@
 #include <math.h>
 using namespace std;
 
-//obs: FALTA LA RENTABILDAD. La rentabilidad mensual es 0.4%.
+//La rentabilidad mensual es 0.4%.
 //este valor se obtuvo al promediar la rentabilidad promedio de todas las afps de los fondos B,C,D y E
 
 
