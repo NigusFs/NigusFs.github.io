@@ -64,7 +64,7 @@ int main() {
 	cout<< ST(S_ob,r_s,RIP,Z,S_v,meses,CAPV); // saldo total ahorrado en la afp al momento de jubilar.
 	// ver cuaderno
 	
-	//Actualizacion : 28/03- 10.23 hrs
+	//Actualizacion : 28/03- 11.03 hrs
 	
 	
 	
