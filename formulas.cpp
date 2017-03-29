@@ -2,15 +2,15 @@
 #include <math.h>
 using namespace std;
 
-
-//hacer una funcion sobre el promedio de vida de las personas y de rentabilidad real
-// tratar de que sea eficiente.
+//obs: FALTA LA RENTABILDAD
+// TRATAR QUE SEA EFICIENTE.
+//ORDENAR LOS CIN
 float r_S(){	//rentabilidad
 
 }
 
 // se establece que la esperanza de vida de los chilenos es : 80.5 años<- hombres | 83.5 <- mujeres.
-//segun internet Afp usan  90	
+//segun comentario de internet Afp usan  90	
 
 float FA(S_ob,r_s,RIP,Z,meses){ // dinero obtenido con las cotizaciones obligatorias 
 								//Sp_ob .formula A .. sacar el parametro r_s, debe ingresar como funcion
@@ -98,7 +98,7 @@ int main() {
 	
 	// ver cuaderno
 	
-	//Actualizacion : 28/03- 12.41 hrs
+	//Actualizacion : 28/03- 12.44 hrs
 	
 	
 	
