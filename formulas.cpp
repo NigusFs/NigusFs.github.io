@@ -23,7 +23,7 @@ float FB(S_v,r_s,meses){ // formula B // Dinero obtenido por la APV
 	St_v=S_v* pow((1+r_s),meses);
 	return St_v;
 }
-float F1(S_ob,r_s,RIP,Z,S_v,meses,CAPV){ // total de dinero al jubilarse Formula 1 // se cambio el nombre de las funciones
+float F1(S_ob,r_s,RIP,Z,S_v,meses,CAPV){ // total de dinero al jubilarse Formula 1
  	float S_T; // ST = saldo total de la AFP
 	float Z1=0; //Z1 sumatoria q acompaña a  CAPV
 	
@@ -117,7 +117,7 @@ int main() {
 		cout<<F2(S_ob,r_s,RIP,Z,S_v,meses,Jd,mv);
 	}
 	
-	//Actualizacion : 29/03- 20.11 hrs
+	//Actualizacion : 29/03- 20.33 hrs
 	
 	return 0;
 }
