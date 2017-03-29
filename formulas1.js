@@ -4,7 +4,7 @@ function r_S(){
 
 }
 
-function(S_ob, r_s, RIP, Z, meses){
+function FA(S_ob, r_s, RIP, Z, meses){
 	var St_ob;
 	for(int i = 1; i <=meses; i++){
 		Z += Math.pow(1 + r_s, i);
@@ -14,7 +14,7 @@ function(S_ob, r_s, RIP, Z, meses){
 	return St_ob;
 }
 
-fuction FB(S_v, r_s, meses){
+function FB(S_v, r_s, meses){
 	var St_v;
 	St_v = S_v * Math.pow(1 + r_s, meses);
 	return St_v;
