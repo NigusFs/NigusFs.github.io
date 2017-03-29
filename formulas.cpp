@@ -2,14 +2,12 @@
 #include <math.h>
 using namespace std;
 
-//obs: FALTA LA RENTABILDAD. La rentabilidad mensual es 0.4% , 
-//este valor se obtuvo al promediar la rentabilidad promedio de todas las afps de los fondos B,C,D y R
-// TRATAR QUE SEA EFICIENTE.
-//ORDENAR LOS CIN
-float r_s=0.4;
+//obs: FALTA LA RENTABILDAD. La rentabilidad mensual es 0.4%.
+//este valor se obtuvo al promediar la rentabilidad promedio de todas las afps de los fondos B,C,D y E
+
 
 // se establece que la esperanza de vida de los chilenos es : 80.5 años<- hombres | 83.5 <- mujeres.
-//segun comentario de internet Afp usan  90	
+	
 
 float FA(S_ob,r_s,RIP,Z,meses){ //formula A  //dinero obtenido con las cotizaciones obligatorias 
 	
@@ -25,7 +23,6 @@ float FB(S_v,r_s,meses){ // formula B // Dinero obtenido por la APV
 	St_v=S_v* pow((1+r_s),meses);
 	return St_v;
 }
-
 float F1(S_ob,r_s,RIP,Z,S_v,meses,CAPV){ // total de dinero al jubilarse Formula 1 // se cambio el nombre de las funciones
  	float S_T; // ST = saldo total de la AFP
 	float Z1=0; //Z1 sumatoria q acompaña a  CAPV
@@ -36,14 +33,12 @@ float F1(S_ob,r_s,RIP,Z,S_v,meses,CAPV){ // total de dinero al jubilarse Formula
  	// de la formula del informe, se asume d =1 , BR=0.
  	S_T= (FA(S_ob,r_s,RIP,Z,meses) + FB(S_v,r_s,meses))+CAPV*Z1;
  		
-	return S_T; 
-		 
- 			
+	return S_T; 		 			
 }
 float F2(S_ob,r_s,RIP,Z,S_v,meses,Jd,mv){ //dinero que se debe adicionar a la APV
 											
  	float Z2=0;//sumatoria que se utiliza en la F2. (colcoar en el informe!)
- 	float CAPV; // dinero q se debe adicionar a la apv. cambio a CAPV
+ 	float CAPV; // dinero q se debe adicionar a la apv. 
  	for(int i=0;i<=meses;i++){
  		Z2+=pow((1+r_s),i);
  	}
@@ -52,7 +47,7 @@ float F2(S_ob,r_s,RIP,Z,S_v,meses,Jd,mv){ //dinero que se debe adicionar a la AP
  	return CAPV;
 }
 int MV(edad,sexo){
-	int mv; //LO CAMBIE A INT
+	int mv; 
 	if (sexo =='H'){
 		mv =(80.5-edad)*12;
 	}else{
@@ -60,8 +55,6 @@ int MV(edad,sexo){
 	}
 	return mv;
 }
-
-//COLOQUE ESTO ---v
 int meses1(edad){// retorna la cantidad de meses que faltan para que el usuario se jubile.
 	int m;
 	if (sexo =='H'){
@@ -88,7 +81,7 @@ int main() {
 	int edad;
 	char sexo;// H hombre, M mujer
 	
-	//ARREGLE LOS COUT
+	
 	cout<<"Ingrese la operacion que desea realizar:"<<endl;
 	cout<<"1.-Obtener el monto de la jubilacion"<<endl;
 	cout<<"2.-Obtener el monto que se debe adicionar a la APV para ganar una cantidad de dinero especifica al momento de jubilarse."<<endl;
@@ -106,17 +99,13 @@ int main() {
 	cout<<"Ingrese el monto ahorrado a la fecha en su APV."<<endl;
 	cin>>S_v;
 	
-	//cin>>r_s; r_s=0.4;
+	
 	cout<<"Ingrese su sueldo imponible promedio. (Estime el sueldo para los años posteriores)"<<endl;
 	cin>>RIP;
 	
 	meses=meses1(edad);
 	int mv=MV(edad,sexo);
-	
-	//cout<<Sp_ob(S_ob,r_s,RIP,Z);// formula A 
-	//cout<<Sp_v(S_v,r_s,meses);// formula B 
-	
-	
+
 	if (op==1){//op =1 retorna el dinero que se recibira mensualmente, despues de jubilarse hasta los 80 años (H) o 83 años (M)
 		
 		cout<< F1(S_ob,r_s,RIP,Z,S_v,meses,CAPV)/ mv; // saldo total ahorrado en la afp al momento de jubilar.
@@ -128,15 +117,7 @@ int main() {
 		cout<<F2(S_ob,r_s,RIP,Z,S_v,meses,Jd,mv);
 	}
 	
-	
-	
-	
-	
 	//Actualizacion : 29/03- 20.11 hrs
-	
-	
-	
-		
 	
 	return 0;
 }
