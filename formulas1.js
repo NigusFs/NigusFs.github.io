@@ -40,7 +40,7 @@ function F2(S_ob, r_s, RIP, Z, S_v, meses, Jd, mv){
 }
 
 function MV(edad, sexo){
-	var mv = (sexo == "h") ? (80.5 - edad)*12 : (83.5 - edad) * 12;
+	var mv = (sexo == "h") ? (80.5 - 65)*12 : (83.5 - 60) * 12;
 	return mv;
 }
 
