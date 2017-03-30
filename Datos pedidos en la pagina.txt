@@ -1,5 +1,5 @@
 Lo que debe pedir la pagina:
--Que desea saber (la pension mensual [2] o cuanto debe dinero debe agregar a la APV [2] )
+-Que desea saber (la pension mensual [1] o cuanto debe dinero debe agregar a la APV [2] )
 -Edad
 -Sexo
 -Dinero ahorrado en la AFP (cotizaciones obligatorias)
