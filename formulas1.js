@@ -1,8 +1,7 @@
 // todo esta relacionado con tu codigo
 
-function r_S(){
-
-}
+//hay q colocar que r_s=0.004
+//hay que crear una funcion meses1 
 
 function FA(S_ob, r_s, RIP, Z, meses){
 	var St_ob;
@@ -23,7 +22,7 @@ function FB(S_v, r_s, meses){
 function F1(S_ob, r_s, RIP, Z, S_v, meses, CAPV){
 	var S_T, Z1 =0;
 	for (int i = 1; i <= meses; i++){
-		z1 += Math.pow(1 + r_s, i);
+		Z1 += Math.pow(1 + r_s, i);
 	}
 
 	S_T = (FA(s_ob, r_s, RIP, Z, meses) + FB(S_v, r_s, meses)) + CAPV * Z1;
@@ -31,7 +30,7 @@ function F1(S_ob, r_s, RIP, Z, S_v, meses, CAPV){
 }
 
 function F2(S_ob, r_s, RIP, Z, S_v, meses, Jd, mv){
-	var Z2 = 0;
+	var CAPV,Z2 = 0;
 	for (int i = 0; i <= meses; i++){
 		Z2 += Math.pow(1 + r_s, i);
 	}
@@ -45,9 +44,14 @@ function MV(edad, sexo){
 	return mv;
 }
 
+function meses1(edad,sexo){
+	var m = (sexo == "h") ? (65 - edad)*12 : (60 - edad) * 12;
+	return m;
+	
+}
 
-function main(op, edad, sexo, Jd, S_ob, r_s, RIP, meses){// los datos se insertan desde la pagina
-	var Z=0, mv = MV(edad, sexo);
+function main(op, edad, sexo, Jd, S_ob, RIP, meses){// los datos se insertan desde la pagina
+	var Z=0, r_s=0.004 , mv = MV(edad, sexo), meses=meses1(edad,sexo);
 	
 	if (op == 1){
 		return F1(s_ob, r_s, RIP, Z, S_v, meses, CAPV) / mv;
