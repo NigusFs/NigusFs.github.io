@@ -49,10 +49,10 @@ float F2(float S_ob,float r_s,float RIP,float Z,float S_v,int meses,int Jd,int m
 int MV(int edad, char sexo){
 	int mv; 
 	if (sexo =='H'){
-		mv =(80.5-edad)*12;
+		mv =(80.5-65)*12;
 	}else{
 		if (sexo == 'M'){
-			mv=(83.5-edad)*12;
+			mv=(83.5-60)*12;
 		}else{cout<<"error"<<endl;}
 	}
 	return mv;
