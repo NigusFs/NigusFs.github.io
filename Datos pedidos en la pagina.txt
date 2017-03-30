@@ -1,0 +1,14 @@
+Lo que debe pedir la pagina:
+-Que desea saber (la pension mensual [2] o cuanto debe dinero debe agregar a la APV [2] )
+-Edad
+-Sexo
+-Dinero ahorrado en la AFP (cotizaciones obligatorias)
+-Dinero ahorrado en la APV (cotizaciones Voluntarias)
+-Sueldo imponible promedio (Que el usuario estime su sueldo en el futuro.)
+
+Depende:
+*si eligio la opcion [1]
+-El promedio de las cotizaciones que realiza mensualmente a la APV
+
+*si eligio la opcion [2]
+-La jubilacion deseada 
