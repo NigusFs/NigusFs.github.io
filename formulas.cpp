@@ -9,7 +9,7 @@ using namespace std;
 // se establece que la esperanza de vida de los chilenos es : 80.5 años<- hombres | 83.5 <- mujeres.
 	
 
-float FA(S_ob,r_s,RIP,Z,meses){ //formula A  //dinero obtenido con las cotizaciones obligatorias 
+float FA(float S_ob,float r_s, float RIP, float Z,int meses){ //formula A  //dinero obtenido con las cotizaciones obligatorias 
 	
 	float St_ob; //St_ob dinero obtenido por la cotizacion obligaroria
 	for (int i=1;i<=meses;i++){
@@ -18,12 +18,12 @@ float FA(S_ob,r_s,RIP,Z,meses){ //formula A  //dinero obtenido con las cotizacio
 	St_ob= S_ob * pow((1+r_s),meses) + 0.1 * RIP * Z;
 	return  St_ob;
 }
-float FB(S_v,r_s,meses){ // formula B // Dinero obtenido por la APV
+float FB(float S_v,float r_s,int meses){ // formula B // Dinero obtenido por la APV
 	float St_v;
 	St_v=S_v* pow((1+r_s),meses);
 	return St_v;
 }
-float F1(S_ob,r_s,RIP,Z,S_v,meses,CAPV){ // total de dinero al jubilarse Formula 1
+float F1(float S_ob,float r_s, float RIP, float Z, float S_v,int meses, int CAPV){ // total de dinero al jubilarse Formula 1
  	float S_T; // ST = saldo total de la AFP
 	float Z1=0; //Z1 sumatoria q acompaña a  CAPV
 	
@@ -35,7 +35,7 @@ float F1(S_ob,r_s,RIP,Z,S_v,meses,CAPV){ // total de dinero al jubilarse Formula
  		
 	return S_T; 		 			
 }
-float F2(S_ob,r_s,RIP,Z,S_v,meses,Jd,mv){ //dinero que se debe adicionar a la APV
+float F2(float S_ob,float r_s,float RIP,float Z,float S_v,int meses,int Jd,int mv){ //dinero que se debe adicionar a la APV
 											
  	float Z2=0;//sumatoria que se utiliza en la F2. (colcoar en el informe!)
  	float CAPV; // dinero q se debe adicionar a la apv. 
@@ -46,16 +46,18 @@ float F2(S_ob,r_s,RIP,Z,S_v,meses,Jd,mv){ //dinero que se debe adicionar a la AP
 
  	return CAPV;
 }
-int MV(edad,sexo){
+int MV(int edad, char sexo){
 	int mv; 
 	if (sexo =='H'){
 		mv =(80.5-edad)*12;
 	}else{
-		mv=(83.5-edad)*12;
+		if (sexo == 'M'){
+			mv=(83.5-edad)*12;
+		}else{cout<<"error"<<endl;}
 	}
 	return mv;
 }
-int meses1(edad){// retorna la cantidad de meses que faltan para que el usuario se jubile.
+int meses1(int edad,char sexo){// retorna la cantidad de meses que faltan para que el usuario se jubile.
 	int m;
 	if (sexo =='H'){
 		m =(65-edad)*12;
@@ -70,7 +72,7 @@ int meses1(edad){// retorna la cantidad de meses que faltan para que el usuario 
 int main() {
 	int op=0;
 	float S_ob; // S_ob dinero ahorrado por la cotizacion obligatoria
-	float r_s=0.4; // r_s rentabilidad real-> el valor es 0.4
+	float r_s=0.004; // r_s rentabilidad real-> el valor es 0.4%
 	float RIP; //RIP sueldo imponible promedio (de donde se descuenta el 10%)
 	float Z=0; // Z sumatoria de la formula
 	float S_v; // S_v dinero ahorrado en la APV
@@ -100,24 +102,34 @@ int main() {
 	cin>>S_v;
 	
 	
+	
 	cout<<"Ingrese su sueldo imponible promedio. (Estime el sueldo para los años posteriores)"<<endl;
 	cin>>RIP;
 	
-	meses=meses1(edad);
-	int mv=MV(edad,sexo);
+	
+	meses=meses1(edad,sexo);
+	mv=MV(edad,sexo);
 
 	if (op==1){//op =1 retorna el dinero que se recibira mensualmente, despues de jubilarse hasta los 80 años (H) o 83 años (M)
-		
-		cout<< F1(S_ob,r_s,RIP,Z,S_v,meses,CAPV)/ mv; // saldo total ahorrado en la afp al momento de jubilar.
+		cout<<"Ingrese un monto promedio de cotizaciones para APV"<<endl;
+		cin>>CAPV;
+
+		cout<<"Monto de su jubilacion: "<<fixed<<F1(S_ob,r_s,RIP,Z,S_v,meses,CAPV)/mv<<endl; // saldo total ahorrado en la afp al momento de jubilar.
 		// Al dividir el valor que retorna F1 por mv se obtiene la jubilacion mensual.
 		
 	}else{//op=2 se retornara el dinero que se debe colocar mensualmente a la APV para poder tener una jubilacion "deseada" por el usuario
-		cout<<"Ingrese la jubilacion que quiere recibir.";
+		if (op==2){
+		cout<<"Ingrese la jubilacion que quiere recibir."<<endl;
 		cin>>Jd;
-		cout<<F2(S_ob,r_s,RIP,Z,S_v,meses,Jd,mv);
+		cout<<"Debe adicionar mensualmente: "<<F2(S_ob,r_s,RIP,Z,S_v,meses,Jd,mv)<<" a su APV"<<endl;
+		}else{
+			cout<<"error."<<endl;
+			return 0;
+		}
+		
 	}
 	
-	//Actualizacion : 29/03- 20.33 hrs
+	//Actualizacion : 29/03- 22.10 hrs
 	
 	return 0;
 }
