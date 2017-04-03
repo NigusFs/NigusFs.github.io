@@ -105,7 +105,7 @@
         if (edad.value >17 && sueldo.value >= 255000){
             document.getElementById("request").style.display = "none";
             document.getElementById("response").style.display = "block";
-            document.getElementById("aa").innerHTML = "Tu jubilacion es de : $" + main(op,edad, sexo, cot_o);
+            document.getElementById("res").innerHTML = "Tu jubilacion es de : $" + main(op,edad, sexo, cot_o);
         }else{
              if (edad.value < 18)
                  alert( (edad.value == "") ? "Rellene el campo de edad.": (edad.value < 17) ? "Tienes que ser mayor de 18." : "");
@@ -173,7 +173,7 @@
     </div>
 
     <div id="response" class="w3-display-middle w3-animate-opacity"><!-- arreglar -->
-        <h1 id="aa"></h1>
+        <h1 id="res"></h1>
     </div>
 </body>
 </html>
