@@ -39,7 +39,7 @@ float F2(float S_ob,float r_s,float RIP,float Z,float S_v,int meses,int Jd,int m
 											
  	float Z2=0;//sumatoria que se utiliza en la F2. (colcoar en el informe!)
  	float CAPV; // dinero q se debe adicionar a la apv. 
- 	for(int i=0;i<=meses;i++){
+ 	for(int i=1;i<=meses;i++){
  		Z2+=pow((1+r_s),i);
  	}
  	CAPV= (mv*Jd-FA(S_ob,r_s,RIP,Z,meses)-FB(S_v,r_s,meses))/(Z2);
