@@ -1,21 +1,4 @@
-Skip to content
-This repository
-Search
-Pull requests
-Issues
-Gist
- @NigusFs
- Sign out
- Watch 1
-  Star 0
-  Fork 1 NigusFs/warmup-tics1
- Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
-Branch: master Find file Copy pathwarmup-tics1/afp.html
-c4377b3  8 hours ago
-@NigusFs NigusFs pagina
-1 contributor
-RawBlameHistory    
-198 lines (167 sloc)  7.32 KB
+
 <!DOCTYPE html>
 <!--suppress JSValidateTypes -->
 <html >
@@ -71,7 +54,7 @@ RawBlameHistory
         }
         function F2(S_ob, r_s, RIP, Z, S_v, meses, Jd, mv) {
             var Z2 = 0, CAPV;
-            for (var i = 0; i <= meses; i++) {
+            for (var i = 1; i <= meses; i++) {
                 Z2 += Math.pow(1 + r_s, i);
             }
             CAPV = (mv * Jd - FA(S_ob, r_s, RIP, Z, meses) - FB(S_v, r_s, meses)) / Z2;
@@ -87,12 +70,12 @@ RawBlameHistory
             return m;
         }
         
-        function main(op, edad, sexo, Jd, S_ob, RIP){// los datos se insertan desde la pagina
+        function main(op, edad, sexo, Jd, S_ob, RIP,CAPV),{// los datos se insertan desde la pagina
 	        var Z=0, r_s = 0.004 , mv = MV(edad, sexo), meses=meses1(edad,sexo);
 	        if (op == 1){
-		        return F1(s_ob, r_s, RIP, Z, S_v, meses, CAPV) / mv;
+		        return F1(S_ob, r_s, RIP, Z, S_v, meses, CAPV) / mv;
 	        }else{
-		        return F2(S_ob, r_s, RIP, Z, S_v, meses, Jd, mv);
+		        return F2(S_ob, r_s, RIP, Z, S_v, meses, Jd, mv)-CAPV;
 	        }
         }
     </script>
@@ -101,15 +84,15 @@ RawBlameHistory
 <body class="w3-light-grey">
 
 <script type="application/javascript">
-    var AFP_CM = {"Capital": 1.44, "Cuprum": 1.48, "Habitad" : 1.27, "Modelo": 0.77, "Planvital": 0.47, "Providad" : 1.54};
-    var AFP_CJ = {"Capital": 1.25, "Cuprum": 1.25, "Habitad" : 0.95, "Modelo": 1.20, "Planvital": 1.25, "Providad" : 1.25};
+   
     var edad, sueldo;
     function Asociado(){
         var x = document.getElementById("si").checked;
-        if (x == true){
+        if (x == false){
             document.getElementById("afp").style.display = "block";
         }else{
             document.getElementById("afp").style.display = "none";
+
         }
     }
     function myFunction() {
@@ -144,28 +127,19 @@ RawBlameHistory
         <h1>Ingrese sus datos</h1>
 
         <div id="select-option">
-            <label for="option">Seleccione opcion</label>
-            <select id="option">
-                <option value="1">la pension mensual</option>
-                <option value="2">dinero debe agregar a la APV</option>
+            <h3>Eliga una opcion</h3>
+                <input id="si" type="radio" name="afi" value="1" onclick="Asociado()" checked >La pension mensual<br>   
+                <input type="radio" name="afi" value="2" onclick="Asociado()" >dinero debe agregar a la APV
             </select>
         </div>
 
-        <label>Afiliado a una AFP</label><br>
-        <input id="si" type="radio" name="afi" value="Si" onclick="Asociado()">Si
-        <input type="radio" name="afi" value="No" onclick="Asociado()" checked>No<br>
+      
 
         <div id="afp" style="display: none;">
-            <label for="select-afp">Selecciona tu afp</label>
-            <select id="select-afp" name="r-afp">
-                <option value="capital">Capital</option>
-                <option value="cuprum">Cuprum</option>
-                <option value="habitad">Habitad</option>
-                <option value="modelo">Modelo</option>
-                <option value="panvital">PlanVital</option>
-                <option value="provida">Provida</option>
-            </select>
+		<label for="miSueldo">Sueldo</label>
+        	<input id="Jd" type="number" name="jd" min="0" placeholder="Jubilacion Deseada" aria-invalid="true"><br>
         </div>
+
 
         <div  id="select-gender" style="max-width: 200px; width: auto;">
             <label for="genero">Sexo</label>
@@ -190,7 +164,11 @@ RawBlameHistory
 
         <label for="sueldoImponible">Sueldo imponible</label>
         <input id="sueldoImponible" type="number" name="sueldoi" placeholder="Estimacion de sueldo a futuro">
+	   
 
+	   <label for="sueldoImponible">Cotizacion mensual voluntaria</label>
+        <input id="sueldoImponible" type="number" name="CAPV" placeholder="Cotizacion APV">  
+	    
         <button onclick="myFunction()" type="submit">Enviar</button>
     </div>
 
@@ -199,5 +177,3 @@ RawBlameHistory
     </div>
 </body>
 </html>
-Contact GitHub API Training Shop Blog About
-© 2017 GitHub, Inc. Terms Privacy Security Status Help
