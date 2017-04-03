@@ -1,3 +1,21 @@
+Skip to content
+This repository
+Search
+Pull requests
+Issues
+Gist
+ @NigusFs
+ Sign out
+ Watch 1
+  Star 0
+  Fork 1 NigusFs/warmup-tics1
+ Code  Issues 0  Pull requests 0  Projects 0  Wiki  Pulse  Graphs  Settings
+Branch: master Find file Copy pathwarmup-tics1/afp.html
+c4377b3  8 hours ago
+@NigusFs NigusFs pagina
+1 contributor
+RawBlameHistory    
+198 lines (167 sloc)  7.32 KB
 <!DOCTYPE html>
 <!--suppress JSValidateTypes -->
 <html >
@@ -35,30 +53,25 @@
             for(var i = 1; i <= meses; i++){
                 Z += Math.pow(1 + r_s, i);
             }
-
-            St_ob = S_ob * Math.pow(1 + r_s, i) + 0.1 * RIP * Z;
+            St_ob = S_ob * Math.pow(1 + r_s, meses) + 0.1 * RIP * Z;
             return St_ob;
         }
-
         function FB(S_v, r_s, meses) {
             var St_v;
             St_v = S_v * Math.pow(1 + r_s, meses);
             return St_v
         }
-
         function F1(S_ob, r_s, RIP, Z, S_v, meses, CAPV) {
             var S_T, Z1 = 0;
             for (var i = 1; i <= meses; i++){
                 Z1 += Math.pow(1 + r_s, i)
             }
-
             S_T = (FA(S_ob, r_s, RIP, Z, meses) + FB(S_v, r_s, meses)) + CAPV * Z1;
             return S_T;
         }
-
         function F2(S_ob, r_s, RIP, Z, S_v, meses, Jd, mv) {
             var Z2 = 0, CAPV;
-            for (var i = 0; i < meses; i++) {
+            for (var i = 0; i <= meses; i++) {
                 Z2 += Math.pow(1 + r_s, i);
             }
             CAPV = (mv * Jd - FA(S_ob, r_s, RIP, Z, meses) - FB(S_v, r_s, meses)) / Z2;
@@ -66,10 +79,9 @@
         }
         
         function MV(edad, sexo) {
-            var mv = (sexo[0].toLowerCase() == "h") ? (80.5 - edad) * 12 : (83.5 - edad) * 12;
+            var mv = (sexo[0].toLowerCase() == "h") ? (80.5 - 65) * 12 : (83.5 - 60) * 12;
             return mv;
         }
-
         function meses1(edad, sexo) {
             var m = (sexo[0].toLowerCase() == "h") ? (65 - edad) * 12 : (60 - edad) * 12;
             return m;
@@ -77,7 +89,6 @@
         
         function main(op, edad, sexo, Jd, S_ob, RIP){// los datos se insertan desde la pagina
 	        var Z=0, r_s = 0.004 , mv = MV(edad, sexo), meses=meses1(edad,sexo);
-
 	        if (op == 1){
 		        return F1(s_ob, r_s, RIP, Z, S_v, meses, CAPV) / mv;
 	        }else{
@@ -90,13 +101,9 @@
 <body class="w3-light-grey">
 
 <script type="application/javascript">
-
     var AFP_CM = {"Capital": 1.44, "Cuprum": 1.48, "Habitad" : 1.27, "Modelo": 0.77, "Planvital": 0.47, "Providad" : 1.54};
     var AFP_CJ = {"Capital": 1.25, "Cuprum": 1.25, "Habitad" : 0.95, "Modelo": 1.20, "Planvital": 1.25, "Providad" : 1.25};
-
     var edad, sueldo;
-
-
     function Asociado(){
         var x = document.getElementById("si").checked;
         if (x == true){
@@ -105,7 +112,6 @@
             document.getElementById("afp").style.display = "none";
         }
     }
-
     function myFunction() {
         edad = document.getElementById("miEdad");
         sueldo = document.getElementById("miSueldo");
@@ -113,7 +119,6 @@
         var cot_o = document.getElementById("miDineroAFP").value;
         var cot_v = document.getElementById("miDineroAPV").value;
         var sexo = document.getElementById("genero").value;
-
         if (edad.value >17 && sueldo.value >= 255000){
             document.getElementById("request").style.display = "none";
             document.getElementById("response").style.display = "block";
@@ -125,8 +130,6 @@
                 alert( (sueldo.value == "") ? "Rellene el campo de sueldo." :(sueldo.value < 255000) ? "Tu sueldo es bajo el minimo.": "")
         }
     }
-
-
 </script>
     <div class="w3-content w3-center w3-padding-32 w3-steal" style="max-width: 1250px;">
         <header class="w3-container w3-center w3-padding-32">
@@ -196,3 +199,5 @@
     </div>
 </body>
 </html>
+Contact GitHub API Training Shop Blog About
+© 2017 GitHub, Inc. Terms Privacy Security Status Help
