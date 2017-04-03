@@ -97,8 +97,6 @@
 	        mv = MV(sexo);
 	        meses = meses1(edad, sexo);
 
-	        alert(F2(S_ob, r_s, RIP, Z, S_v, meses, Jd, mv) );
-
 	        if (op === "1"){
 		        result =  F1(S_ob, r_s, RIP, Z, S_v, meses, CAPV) / mv;
 	        }else{
@@ -150,9 +148,9 @@
             document.getElementById("response").style.display = "block";
             res = main(op,edad.value, sexo, cot_o, cot_v, sueldoI, CAPV, Jd);
             if (op === "1")
-                document.getElementById("aa").innerHTML = "Tu jubilacion es de : $" + res;
+                document.getElementById("res").innerHTML = "Tu jubilacion es de : $" + res;
             else
-                document.getElementById("aa").innerHTML = "Tu impocisiones tienen que ser de: $" + res;
+                document.getElementById("res").innerHTML = "Tu impocisiones tienen que ser de: $" + res;
         }else{
              if (edad.value < 18)
                  alert( (edad.value === "") ? "Rellene el campo de edad.": (edad.value < 17) ? "Tienes que ser mayor de 18." : "");
@@ -221,7 +219,7 @@
     </div>
 
     <div id="response" class="w3-display-middle w3-animate-opacity"><!-- arreglar -->
-        <h1 id="aa"></h1>
+        <h1 id="res"></h1>
     </div>
 </body>
 </html>
