@@ -57,7 +57,7 @@
                 Z1 += Math.pow(1 + r_s, i)
             }
 
-            S_T = (FA(S_ob, r_s, RIP, Z, meses) + FB(S_v, r_s, meses)) + CAPV ;
+            S_T = (FA(S_ob, r_s, RIP, Z, meses) + FB(S_v, r_s, meses)) + CAPV *Z1;
             return S_T;
         }
 
@@ -84,9 +84,9 @@
         function meses1(edad, sexo) {
             var result = 0;
             if (sexo === "h"){
-                result = (80.5 - edad) * 12;
+                result = (65 - edad) * 12;
             }else{
-                result = (83.5 - edad) * 12;
+                result = (60 - edad) * 12;
             }
             return result;
         }
