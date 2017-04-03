@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--suppress JSValidateTypes -->
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/3/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="style.css">
+    <title>Retirement simulator</title><!--Cambiar-->
+    <style>
+        #request{
+            display: block;
+            border-radius: 5px;
+            padding: 20px;
+            font-size: 16px;
+        }
+        #response{
+            display: none;
+        }
+        input[type="number"], select{
+            width:100%;
+            padding: 12px 20px;
+            margin: 10px 0;
+            display: inline-block;
+            border:1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #miEdad,#miSueldo{
+            max-width:135px;
+        }
+    </style>
+    <script type="application/javascript">
+        function FA(S_ob, r_s, RIP, Z, meses) {
+            var St_ob;
+            for(var i = 1; i <= meses; i++){
+                Z += Math.pow(1 + r_s, i);
+            }
+
+            St_ob = S_ob * Math.pow(1 + r_s, meses) + 0.1 * RIP * Z;
+            return St_ob;
+        }
+
+        function FB(S_v, r_s, meses) {
+            var St_v;
+            St_v = S_v * Math.pow(1 + r_s, meses);
+            return St_v
+        }
+
+        function F1(S_ob, r_s, RIP, Z, S_v, meses, CAPV) {
+            var S_T, Z1 = 0;
+            for (var i = 1; i <= meses; i++){
+                Z1 += Math.pow(1 + r_s, i)
+            }
+
+            S_T = (FA(S_ob, r_s, RIP, Z, meses) + FB(S_v, r_s, meses)) + CAPV ;
+            return S_T;
+        }
+
+        function F2(S_ob, r_s, RIP, Z, S_v, meses, Jd, mv) {
+            var Z2 = 0, CAPV;
+            for (var i = 1; i <= meses; i++) {
+                Z2 += Math.pow(1 + r_s, i);
+            }
+            CAPV = (mv * Jd - FA(S_ob, r_s, RIP, Z, meses) - FB(S_v, r_s, meses)) / Z2;
+            return CAPV;
+        }
+
+
+        function MV(sexo) {
+            var result = 0;
+            if (sexo === "h"){
+                result = 186;
+            }else{
+                result = 282;
+            }
+            return result;
+        }
+
+        function meses1(edad, sexo) {
+            var result = 0;
+            if (sexo === "h"){
+                result = (80.5 - edad) * 12;
+            }else{
+                result = (83.5 - edad) * 12;
+            }
+            return result;
+        }
+        
+        function main(op, edad, sexo, S_ob, S_v, RIP, CAPV, Jd){// los datos se insertan desde la pagina
+	        var Z=0, r_s = 0.004 , mv, meses, result = 0;
+
+	        mv = MV(sexo);
+	        meses = meses1(edad, sexo);
+
+	        alert(F2(S_ob, r_s, RIP, Z, S_v, meses, Jd, mv) );
+
+	        if (op === "1"){
+		        result =  F1(S_ob, r_s, RIP, Z, S_v, meses, CAPV) / mv;
+	        }else{
+		        result =  F2(S_ob, r_s, RIP, Z, S_v, meses, Jd, mv);
+	        }
+	        return result;
+        }
+    </script>
+</head>
+
+<body class="w3-light-grey">
+
+<script type="application/javascript">
+
+    var edad, sueldo, CAPV, Jd;
+
+
+    function Asociado(){
+        var x = document.getElementById("option").value;
+
+        if (x === "1"){
+            document.getElementById("op1").style.display = "block";
+            document.getElementById("op2").style.display = "none";
+        }else{
+            document.getElementById("op1").style.display = "none";
+            document.getElementById("op2").style.display = "block";
+
+        }
+    }
+
+    function myFunction() {
+        edad = document.getElementById("miEdad");
+        sueldo = document.getElementById("miSueldo");
+
+        var op = document.getElementById("option").value; // operacion
+        var cot_o = document.getElementById("miDineroAFP").value; // dinero ahorrado por la cotizacion obligatoria
+        var cot_v = document.getElementById("miDineroAPV").value; // dinero ahorrado en la APV
+        var sexo = document.getElementById("genero").value;
+        var sueldoI = document.getElementById("sueldoImponible").value; // sueldo imponible
+
+        sexo = (sexo === "hombre" ) ? "h":"m" ;
+
+        CAPV = document.getElementById("mpromedio").value;
+        Jd = document.getElementById("jubilacion").value;
+
+        if (edad.value >17 && sueldo.value >= 255000){
+            var res;
+            document.getElementById("request").style.display = "none";
+            document.getElementById("response").style.display = "block";
+            res = main(op,edad.value, sexo, cot_o, cot_v, sueldoI, CAPV, Jd);
+            if (op === "1")
+                document.getElementById("aa").innerHTML = "Tu jubilacion es de : $" + res;
+            else
+                document.getElementById("aa").innerHTML = "Tu impocisiones tienen que ser de: $" + res;
+        }else{
+             if (edad.value < 18)
+                 alert( (edad.value === "") ? "Rellene el campo de edad.": (edad.value < 17) ? "Tienes que ser mayor de 18." : "");
+             if (sueldo.value < 255000)
+                alert( (sueldo.value === "") ? "Rellene el campo de sueldo." :(sueldo.value < 255000) ? "Tu sueldo es bajo el minimo.": "")
+        }
+
+
+    }
+
+
+</script>
+    <div class="w3-content w3-center w3-padding-32 w3-steal" style="max-width: 1250px;">
+        <header class="w3-container w3-center w3-padding-32">
+            <h1>Retirement simulator/h1><!--Cambiar-->
+        </header>
+    </div>
+    <div class="w3-third">
+        <br>
+    </div>
+
+    <div id="request" class="w3-center w3-third w3-margin w3-white w3-animate-opacity">
+        <h1>Ingrese sus datos</h1>
+
+        <div id="select-option ">
+            <label for="option">Seleccione opcion</label>
+            <select id="option">
+                <option value="1" onclick="Asociado()">pension mensual</option>
+                <option value="2" onclick="Asociado()">dinero debe agregar a la APV</option>
+            </select>
+        </div>
+
+        <div id="select-genero" style="max-width: 200px; width: auto;">
+            <label for="genero">Sexo</label>
+            <input type="radio" id="genero" name="genero" value="mujer" checked>Mujer
+            <input type="radio" id="genero" name="genero" value="hombre">Hombre
+        </div>
+
+        <br>
+        <label for="miEdad">Edad</label>
+        <input id="miEdad" type="number" name="edad" min="18" placeholder="Tu edad" aria-invalid="true">
+
+        <label for="miSueldo">Sueldo</label>
+        <input id="miSueldo" type="number" name="sueldo" min="225000" placeholder="Tu sueldo" aria-invalid="true"><br>
+
+        <label for="miDineroAFP">Dinero ahorrado en la AFP</label>
+        <input id="miDineroAFP" type="number" name="dineroafp" placeholder="cotizaciones obligatorias">
+
+        <label for="miDineroAPV">Dinero ahorrado en la APV</label>
+        <input id="miDineroAPV" type="number" name="dineroapv" placeholder="cotizaciones voluntarias">
+
+        <label for="sueldoImponible">Sueldo imponible</label>
+        <input id="sueldoImponible" type="number" name="sueldoi" placeholder="Estimacion de sueldo a futuro">
+
+        <div id="op1">
+            <label for="mpromedio">Monto promedio de cotiazciones para APV</label>
+            <input id="mpromedio" type="number" name="mpromedio" placeholder="Cotizaciones">
+        </div>
+
+        <div id="op2" style="display:none">
+            <label for="jubilacion">Jubilacion deaseada</label>
+            <input id="jubilacion" type="number" name="jubilacion" placeholder="Jubilacion">
+        </div>
+
+        <button onclick="myFunction();" type="submit">Enviar</button>
+    </div>
+
+    <div id="response" class="w3-display-middle w3-animate-opacity"><!-- arreglar -->
+        <h1 id="aa"></h1>
+    </div>
+</body>
+</html>
