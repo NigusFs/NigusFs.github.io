@@ -66,7 +66,7 @@
             for (var i = 1; i <= meses; i++) {
                 Z2 += Math.pow(1 + r_s, i);
             }
-            CAPV = (mv * Jd - FA(S_ob, r_s, RIP, Z, meses) - FB(S_v, r_s, meses)) / Z2;
+            CAPV = Math.abs((mv * Jd - FA(S_ob, r_s, RIP, Z, meses) - FB(S_v, r_s, meses)) / Z2);
             return CAPV;
         }
 
