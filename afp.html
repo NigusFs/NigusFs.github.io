@@ -123,16 +123,19 @@
     }
 
 
-    function changeFunc(x) {
-    if (x==1){
-        document.getElementById("op1").style.display = "block";
-        document.getElementById("op2").style.display = "none";
-    }else{
-        document.getElementById("op2").style.display = "block";
-        document.getElementById("op1").style.display = "none";
-    }
+    function Asociado(){
+        var y = document.getElementById("option-1").selected;
+        var x = document.getElementById("option-1").selected;
 
-   }
+        if (y === true) {
+            document.getElementById("op1").style.display = "block";
+            document.getElementById("op2").style.display = "none";
+        }else{
+            document.getElementById("op1").style.display = "none";
+            document.getElementById("op2").style.display = "block";
+
+        }
+    }
 
 
     function myFunction() {
@@ -182,10 +185,10 @@
         <h1>Ingrese sus datos</h1>
 
         <div id="select-option ">
-            <label for="option">Seleccione opcion </label>
-            <select id="option" onchange="changeFunc(value);">
-                <option value="1" >pension mensual</option>
-                <option value="2" >dinero debe agregar a la APV</option>
+            <label for="option">Seleccione opcion</label>
+            <select id="option">
+                <option id="option-1" value="1" onclick="Asociado()" selected>pension mensual</option>
+                <option id="option-2" value="2" onclick="Asociado()">dinero debe agregar a la APV</option>
             </select>
         </div>
 
